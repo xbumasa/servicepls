@@ -1,0 +1,30 @@
+{
+  "name": "servicepls-api",
+  "version": "1.0.0",
+  "description": "Servicepls API",
+  "main": "index.js",
+  "scripts": {
+    "start": "pm2-runtime index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "initdb": "node src/initdb.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@nonocast/koa-mongoose": "^1.1.0",
+    "config": "^3.3.1",
+    "cryptr": "^6.0.2",
+    "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-jwt": "^4.0.0",
+    "koa-router": "^9.4.0",
+    "mongoose": "^5.10.0",
+    "nodemon": "^2.0.4",
+    "url-safe-base64": "^1.1.1",
+    "uuid": "^8.3.0"
+  }
+}

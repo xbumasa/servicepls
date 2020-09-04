@@ -1,0 +1,21 @@
+{
+  "name": "servicepls-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@mdi/font": "^5.5.55",
+    "@neneos/nuxt-animate.css": "0.0.1",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.12.2",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "material-design-icons-iconfont": "^5.0.1",
+    "nuxt": "^2.14.0"
+  },
+  "devDependencies": {}
+}

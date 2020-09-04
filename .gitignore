@@ -1,0 +1,14 @@
+# IntelliJ
+out/
+.idea/
+*.iml
+
+# runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+.env
+
+docker-compose-backup.yml
