@@ -1,11 +1,11 @@
-export USERID=$(id -u)
-export GROUPID=$(id -g)
+USERID  = $(shell id -u)
+GROUPID = $(shell id -g)
 
 compose.dev.up:
 	@sudo docker-compose -f docker-compose.dev.yml up -d --build
 
 compose.prod.up:
-	@sudo docker-compose -f docker-compose.prod.yml up -d --build
+	@sudo USERID=$(USERID) GROUPID=$(GROUPID) docker-compose -f docker-compose.prod.yml up -d --build
 
 compose.dev.stop:
 	@sudo docker-compose -f docker-compose.dev.yml stop
@@ -13,9 +13,14 @@ compose.dev.stop:
 compose.prod.stop:
 	@sudo docker-compose -f docker-compose.prod.yml stop
 
-#mongoup:
-#	@sudo docker run --rm -it -v /data/db:/mongodata -p 27017:27017 --name mongodb -d mongo
+cd.api:
+	@sudo docker exec -it spapic bash
 
-#cphp:
-#	@sudo docker exec -it spnodeappc bash
+cd.app:
+	@sudo docker exec -it spappc bash
 
+cd.nginx:
+	@sudo docker exec -it spnginxc bash
+
+cd.nginx:
+	@sudo docker exec -it spdbc bash

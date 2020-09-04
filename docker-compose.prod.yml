@@ -47,6 +47,10 @@ services:
       - NUXT_PORT=$NUXT_PORT
     ports:
       - $NUXT_PORT:$NUXT_PORT
+    volumes:
+      - /etc/group:/etc/group:ro
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
     networks:
       - spappnetwork
     command: npm run start

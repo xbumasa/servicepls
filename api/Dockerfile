@@ -11,15 +11,12 @@ RUN set -x \
 
 WORKDIR /var/node/spapi
 
-RUN set -x \
-	mkdir -p /var/node/spapi/scripts
-
 COPY ./src ./
 
-COPY ./scripts/wait-for.sh ./scripts
+ADD scripts scripts
 
 RUN set -x \
-	chmod +x ./scripts/wait-for.sh
+	chmod +x scripts/wait-for.sh
 
 COPY package*.json ./
 
