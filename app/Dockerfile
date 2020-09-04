@@ -14,8 +14,4 @@ COPY . .
 
 RUN npm install
 
-ARG NUXT_PORT
-
-EXPOSE $NUXT_PORT
-
 RUN npm run build

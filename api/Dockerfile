@@ -23,7 +23,3 @@ COPY package*.json ./
 RUN npm install
 
 RUN npm install -g pm2
-
-ARG API_PORT
-
-EXPOSE $API_PORT

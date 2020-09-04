@@ -14,11 +14,11 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'SERVICEPLS.ME',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: 'SERVICEPLS.ME' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -69,7 +69,7 @@ export default {
     defaultAssets: false
   },
   axios: {
-    baseURL: 'http://localhost:3032'
+    baseURL: 'http://api.servicepls.me'
   },
   auth: {
     strategies: {
