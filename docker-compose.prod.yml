@@ -43,6 +43,7 @@ services:
     environment:
       - NUXT_HOST=$NUXT_HOST
       - NUXT_PORT=$NUXT_PORT
+      - API_BASEURL=$API_BASEURL
     depends_on:
       - api
     expose:

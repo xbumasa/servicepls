@@ -69,7 +69,7 @@ export default {
     defaultAssets: false
   },
   axios: {
-    baseURL: 'http://api.servicepls.me'
+    baseURL: process.env.API_BASEURL+":"+process.env.API_PORT
   },
   auth: {
     strategies: {
