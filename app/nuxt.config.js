@@ -69,7 +69,7 @@ export default {
     defaultAssets: false
   },
   axios: {
-    baseURL: process.env.API_BASEURL+":"+process.env.API_PORT
+    baseURL: process.env.API_BASEURL+(process.env.PROD ? "" : ":"+process.env.API_PORT)
   },
   auth: {
     strategies: {

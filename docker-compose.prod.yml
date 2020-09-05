@@ -44,6 +44,7 @@ services:
       - NUXT_HOST=$NUXT_HOST
       - NUXT_PORT=$NUXT_PORT
       - API_BASEURL=$API_BASEURL
+      - PROD=$PROD
     depends_on:
       - api
     expose:
