@@ -6,6 +6,18 @@ module.exports = function(){
     let router = new KoaRouter();
 
     router.post('/order', async (ctx, next) => {
+        if(!ctx.request.body.OrderTypeID){
+            ctx.status = 401
+            return
+        }
+
+        let OrderTypeID = ctx.request.body.OrderTypeID;
+
+        if(!(/^\d+$/.test(OrderTypeID))){
+            ctx.status = 401
+            return
+        }
+
         const crypt = new Cryptor(process.env.CRYPT_TOKEN)
 
         let jwt_payload;
@@ -25,7 +37,7 @@ module.exports = function(){
             Customers: {$elemMatch: {CustomerID: jwt_payload.CustomerID}}
         },{
             $push:{"Customers.$.Orders":{
-                    OrderTypeID: ctx.request.body.OrderTypeID
+                    OrderTypeID: OrderTypeID
                 }}
         }).exec()
 

@@ -2,7 +2,7 @@ const KoaRouter = require('koa-router');
 const { verify: VerifyWebToken, sign: SignToken, TokenExpiredError } = require('jsonwebtoken');
 const Cryptor = require('cryptr');
 const { v4: uuidv4 } = require('uuid');
-const { encode: Base64SafeEncode, decode: Base64SafeDecode } = require('../utils/Base64Safe');
+const { encode: Base64SafeEncode, decode: Base64SafeDecode, validate: isBase64Safe } = require('../utils/Base64Safe');
 const ServiceSessionsModel = require('../models/ServiceSessions');
 
 const {
@@ -40,6 +40,11 @@ module.exports = function (){
         let auth_data;
 
         if(ctx.request.body.o){
+            if(!isBase64Safe(ctx.request.body.o)){
+                ctx.status = 401
+                return
+            }
+
             try{
                 auth_data = await crypt.decrypt(Base64SafeDecode(ctx.request.body.o))
                 auth_data = JSON.parse(auth_data)
