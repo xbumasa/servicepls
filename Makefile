@@ -14,13 +14,13 @@ compose.prod.stop:
 	@sudo USERID=$(USERID) GROUPID=$(GROUPID) docker-compose -f docker-compose.prod.yml stop
 
 cd.api:
-	@sudo docker exec -it spapic bash
+	@sudo docker exec -it api bash
 
 cd.app:
-	@sudo docker exec -it spappc bash
+	@sudo docker exec -it app bash
 
 cd.nginx:
-	@sudo docker exec -it spnginxc bash
+	@sudo docker exec -it proxy bash
 
 cd.mongo:
-	@sudo docker exec -it spdbc bash
+	@sudo docker exec -it db bash
