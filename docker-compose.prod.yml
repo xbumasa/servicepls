@@ -29,7 +29,7 @@ services:
     networks:
       - internal
       - web
-    command: scripts/wait-for.sh db:$MONGO_PORT -- /usr/local/bin/pm2-runtime /var/node/spapi/index.js
+    command: scripts/wait-for.sh db:$MONGO_PORT -- node_modules/.bin/nodemon /var/node/spapi/index.js
 
   app:
     build:

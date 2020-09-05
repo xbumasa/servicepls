@@ -4,7 +4,7 @@
   "description": "Servicepls API",
   "main": "index.js",
   "scripts": {
-    "start": "pm2-runtime index.js",
+    "start": "node index.js",
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "initdb": "node src/initdb.js"
