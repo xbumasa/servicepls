@@ -1,7 +1,11 @@
 <template>
-  <div>
     <v-app :style="{ backgroundPositionY: 'center', backgroundPositionX: 'center', backgroundImage: 'url(' + require('@/assets/retrobg.jpg') + ')' }">
           <Nuxt />
     </v-app>
-  </div>
 </template>
+
+<style scoped>
+html{
+  overflow-y: hidden;
+}
+</style>
