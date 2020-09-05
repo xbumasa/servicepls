@@ -32,7 +32,6 @@ module.exports = function (){
 
         if(!ctx.request.body.o && !jwt_token){
             ctx.status = 401
-            console.log('1')
             return
         }
 
@@ -46,14 +45,12 @@ module.exports = function (){
                 auth_data = JSON.parse(auth_data)
             }
             catch (e){
-                console.log(e.message)
-                ctx.status = 401
+                ctx.body = e.message
                 return
             }
         }
 
         if(!auth_data){
-            console.log('2')
             ctx.status = 401
             return
         }
@@ -72,7 +69,6 @@ module.exports = function (){
                         auth_data.TableID !== jwt_payload.TableID ||
                         auth_data.RestaurantID !== jwt_payload.RestaurantID
                     ){
-                        console.log('3')
                         ctx.status = 401
                         return
                     }
@@ -85,14 +81,12 @@ module.exports = function (){
                     }).exec()
 
                     if(!ValidateSessionCustomer){
-                        console.log('4')
                         ctx.status = 401
                         return
                     }
                 }
                 catch(e){
                     if(!(e instanceof TokenExpiredError)){
-                        console.log(e.message)
                         ctx.status = 401;
                         return
                     }
@@ -108,7 +102,6 @@ module.exports = function (){
             }).select({_id:1}).exec()
 
             if(!ValidateSession){
-                console.log('5')
                 ctx.status = 401;
                 return
             }
