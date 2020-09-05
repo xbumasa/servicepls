@@ -88,8 +88,6 @@ services:
 networks:
   internal:
   web:
-    external:
-      name: nginx_web
 
 volumes:
   dbdata:
