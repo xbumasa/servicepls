@@ -81,13 +81,12 @@ export default {
           logout: false,
           user: false
         }
-        //tokenRequired: true
       }
     },
     redirect: {
       login: '/',
       logout: '/',
-      home: '/dashboard'
+      home: '/service'
     }
   }
 }

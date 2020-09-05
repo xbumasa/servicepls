@@ -39,7 +39,7 @@ import BeerWine from "@/components/BeerWine";
 import CheckPlease from "@/components/CheckPlease";
 
 export default {
-  name: "dashboard",
+  name: "service",
   layout: "app",
   components: {
     CheckPlease,
