@@ -30,7 +30,6 @@ module.exports = function(){
         }).exec()
 
         ctx.status = 200
-        ctx.body = JSON.stringify(ValidateSession)
     })
 
     return router
