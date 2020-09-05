@@ -68,8 +68,10 @@ export default {
     treeShake: true,
     defaultAssets: false
   },
-  axios: {
-    baseURL: process.env.NUXT_ENV_API_BASEURL+(process.env.NUXT_ENV_PROD ? "" : ":"+process.env.NUXT_ENV_API_PORT)
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_URL
+    }
   },
   auth: {
     strategies: {
