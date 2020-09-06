@@ -1,5 +1,7 @@
 <template>
-  <v-btn rounded block class="btn-custom" @click="MakeOrder(info)"><v-icon x-large>mdi-calculator</v-icon><span>חשבון בבקשה</span></v-btn>
+  <v-btn rounded block class="btn-custom" @click="MakeOrder( )"><v-icon x-large>mdi-calculator</v-icon><span>חשבון בבקשה</span>
+    <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
+  </v-btn>
 </template>
 
 <script>
@@ -7,15 +9,32 @@ export default {
   name: "CheckPlease",
   data(){
     return {
+      color: '',
+      text: '',
+      snackbar: false,
+      error_text: 'לא שכחתי ממך, כבר אצליך :)',
+      success_color: 'success',
+      error_color: 'info',
       info: {
-        OrderTypeID: '1025'
+        success_text: 'חשבון בדרך אליך!',
+        order: {
+          OrderTypeID: '1025'
+        }
       }
     }
   },
   methods: {
-    async MakeOrder(info){
-      await this.$axios.post('/order', info).then((res) => {
-        ///showpopup
+    async MakeOrder( ){
+      await this.$axios.post('/order', this.info.order).then((res) => {
+        if(res.status == 200 && res.data.toString() == 'OK' ){
+          this.text = this.info.success_text
+          this.color = this.success_color
+        }
+        else{
+          this.text = this.error_text
+          this.color = this.error_color
+        }
+        this.snackbar = true
       }).catch((e) => {
         this.$auth.logout( )
       })

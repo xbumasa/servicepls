@@ -9,42 +9,42 @@
       </v-toolbar>
       <v-card>
         <v-col>
-          <v-list-item @click="MakeOrder(infoA)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer1)" class="rtl">
             <v-list-item-content><span>בירה הייניקן בקבוק 1/3</span><span class="price">20 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
-          <v-list-item @click="MakeOrder(infoB)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer2)" class="rtl">
             <v-list-item-content><span>בירה קרלסברג בקבוק 1/3</span><span class="price">20 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
-          <v-list-item @click="MakeOrder(infoC)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer3)" class="rtl">
             <v-list-item-content><span>בירה פאולנר חבית 1/2</span><span class="price">30 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
-          <v-list-item @click="MakeOrder(infoD)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer4)" class="rtl">
             <v-list-item-content><span>בירה מייסלוייס חבית 1/2</span><span class="price">35 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
-          <v-list-item @click="MakeOrder(infoE)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer5)" class="rtl">
             <v-list-item-content><span>כוס יין לבן</span><span class="price">40 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
-          <v-list-item @click="MakeOrder(infoF)" class="rtl">
+          <v-list-item @click="MakeOrder(info.beer6)" class="rtl">
             <v-list-item-content><span>כוס יין אדום</span><span class="price">40 ש"ח</span></v-list-item-content>
             <v-list-item-icon>
               <v-icon>mdi-gesture-tap</v-icon>
@@ -54,7 +54,9 @@
         </v-col>
       </v-card>
     </v-dialog>
-    <v-icon x-large>mdi-glass-mug-variant</v-icon><span>בירה ויין</span></v-btn>
+    <v-icon x-large>mdi-glass-mug-variant</v-icon><span>בירה ויין</span>
+      <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
+    </v-btn>
 </template>
 
 <script>
@@ -66,30 +68,64 @@ export default {
       notifications: false,
       sound: true,
       widgets: true,
-      infoA: {
-        OrderTypeID: '1011'
-      },
-      infoB: {
-        OrderTypeID: '1012'
-      },
-      infoC: {
-        OrderTypeID: '1013'
-      },
-      infoD: {
-        OrderTypeID: '1014'
-      },
-      infoE: {
-        OrderTypeID: '1015'
-      },
-      infoF: {
-        OrderTypeID: '1016'
+      color: '',
+      text: '',
+      snackbar: false,
+      error_text: 'לא שכחתי ממך, כבר אצליך :)',
+      success_color: '#98ac3b',
+      error_color: '#d85634',
+      info: {
+        beer1:{
+          success_text: 'בירה הייניקן בקבוק 1/3 בדרך אליך!',
+          order: {
+            OrderTypeID: '1011'
+          }
+        },
+        beer2:{
+          success_text: 'בירה קרלסברג בקבוק 1/3 בדרך אליך!',
+          order: {
+            OrderTypeID: '1012'
+          }
+        },
+        beer3:{
+          success_text: 'בירה פאולנר חבית 1/2 בדרך אליך!',
+          order: {
+            OrderTypeID: '1013'
+          }
+        },
+        beer4:{
+          success_text: 'בירה מייסלוייס חבית 1/2 בדרך אליך!',
+          order: {
+            OrderTypeID: '1014'
+          }
+        },
+        beer5:{
+          success_text: 'כוס יין לבן בדרך אליך!',
+          order: {
+            OrderTypeID: '1015'
+          }
+        },
+        beer6:{
+          success_text: 'כוס יין אדום בדרך אליך!',
+          order: {
+            OrderTypeID: '1016'
+          }
+        }
       }
     }
   },
   methods: {
     async MakeOrder(info){
-      await this.$axios.post('/order', info).then((res) => {
-        ///showpopup
+      await this.$axios.post('/order', info.order).then((res) => {
+        if(res.status == 200 && res.data.toString() == 'OK' ){
+          this.text = info.success_text
+          this.color = this.success_color
+        }
+        else{
+          this.text = this.error_text
+          this.color = this.error_color
+        }
+        this.snackbar = true
       }).catch((e) => {
         this.$auth.logout( )
       })
