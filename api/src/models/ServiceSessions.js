@@ -10,7 +10,7 @@ const ServiceSessionsSchema = Mongoose.Schema({
     },
     CreatedAt:{
         type: Date,
-        default: Date.now()
+        required: true
     },
     Status:{
         type: Boolean,
@@ -34,7 +34,7 @@ const ServiceSessionsSchema = Mongoose.Schema({
                     },
                     OrderedAt:{
                         type: Date,
-                        default: Date.now()
+                        required: true
                     },
                     Done:{
                         type: Boolean,

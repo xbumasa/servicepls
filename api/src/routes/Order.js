@@ -31,15 +31,58 @@ module.exports = function(){
             return
         }
 
-        const ValidateSession = await ServiceSessionsModel.update({
+        const ValidateSession = await ServiceSessionsModel.findOne({
+            _id:jwt_payload.SessionID,
+            Status: true
+        }).select({_id:1}).exec()
+
+        if(!ValidateSession){
+            ctx.status = 401
+            return
+        }
+
+        let OrderTimeframe = new Date()
+        OrderTimeframe.setTime(OrderTimeframe.getTime()-(3*60*1000))
+
+        const ValidateSessionOrder = await ServiceSessionsModel.find({
+            _id: jwt_payload.SessionID,
+            Status: true,
+            Customers: {
+                $elemMatch: {
+                    CustomerID: jwt_payload.CustomerID,
+                    Orders:{
+                        $elemMatch:{
+                            OrderTypeID: OrderTypeID,
+                            Done: false,
+                            OrderedAt: {$gte: OrderTimeframe}
+                        }
+                    }
+                }
+            }
+        },{"Customers.$": 1}).
+        exec()
+
+        if(ValidateSessionOrder.length){
+            ctx.status = 200
+            ctx.body = 'WAIT'
+            return
+        }
+
+        const InsertOrder = await ServiceSessionsModel.update({
             _id:jwt_payload.SessionID,
             Status: true,
             Customers: {$elemMatch: {CustomerID: jwt_payload.CustomerID}}
         },{
             $push:{"Customers.$.Orders":{
-                    OrderTypeID: OrderTypeID
+                    OrderTypeID: OrderTypeID,
+                    OrderedAt: Date.now()
                 }}
         }).exec()
+
+        if(!InsertOrder.n){
+            ctx.status = 401
+            return
+        }
 
         ctx.status = 200
     })

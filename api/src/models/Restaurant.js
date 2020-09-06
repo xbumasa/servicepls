@@ -12,7 +12,7 @@ const RestaurantSchema = Mongoose.Schema({
     },
     CreatedAt: {
         type: Date,
-        default: Date.now()
+        required: true
     },
     IsOpen: {
         type: Boolean,

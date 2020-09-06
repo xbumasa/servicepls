@@ -8,6 +8,7 @@ RestaurantModel.create({
     RestaurantID: 100,
     Name: 'FalafelTaim',
     IsOpen: true,
+    CreatedAt: Date.now(),
     Tables:[{
         TableID: 1,
         TableNumber: 1,
@@ -29,10 +30,12 @@ RestaurantModel.create({
 ServiceSessions.create({
     RestaurantID: 100,
     TableID: 1,
+    CreatedAt: Date.now(),
     Customers: []
 },{
     RestaurantID: 100,
     TableID: 2,
+    CreatedAt: Date.now(),
     Customers: []
 })
     .then(( )=>{
