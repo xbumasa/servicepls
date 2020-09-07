@@ -44,16 +44,6 @@ import Extras from "@/components/Extras";
 
 export default {
   name: "service",
-  data(){
-    return {
-      num: 0
-    }
-  },
-  methods:{
-    handleChange(){
-
-    }
-  },
   layout: "app",
   components: {
     Extras,
@@ -70,7 +60,19 @@ export default {
     Bread,
     HotDrinks
   },
-  middleware: 'auth'
+  middleware: 'auth',
+  fetch(ctx){
+    if(!ctx.$auth.loggedIn){
+      return ctx.redirect('/')
+    }
+  },
+  mounted( ){
+    if(!this.$auth.loggedIn){
+      this.$router.push('/')
+      return
+    }
+  }
+
 }
 </script>
 
