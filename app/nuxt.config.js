@@ -28,13 +28,15 @@ export default {
   ** Global CSS
   */
   css: [
+    /*'./node_modules/element-ui/lib/theme-chalk/index.css'*/
   ],
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/vuetify.js'
+    '~/plugins/vuetify.js',
+    /*'@/plugins/element-ui'*/
   ],
   /*
   ** Auto import components
