@@ -12,6 +12,7 @@ module.exports = function(){
         }
 
         let OrderTypeID = ctx.request.body.OrderTypeID;
+        let OrderAmount = ctx.request.body.OrderAmount;
 
         if(!(/^\d+$/.test(OrderTypeID))){
             ctx.status = 401
@@ -75,7 +76,8 @@ module.exports = function(){
         },{
             $push:{"Customers.$.Orders":{
                     OrderTypeID: OrderTypeID,
-                    OrderedAt: Date.now()
+                    OrderedAt: Date.now(),
+                    Amount: OrderAmount
                 }}
         }).exec()
 

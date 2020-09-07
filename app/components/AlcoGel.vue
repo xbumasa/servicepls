@@ -1,12 +1,12 @@
 <template>
-  <v-btn rounded class="btn-custom rtl mb-4" block @click="MakeOrder()"><v-icon large>mdi-human-greeting</v-icon><span>מוכן להזמין</span>
+  <v-btn rounded class="btn-custom mb-4" block @click="MakeOrder( )"><v-icon large>mdi-virus-outline</v-icon><span>אלקוג'ל</span>
     <v-snackbar v-model="snackbar.on" timeout="2000" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
   </v-btn>
 </template>
 
 <script>
 export default {
-  name: "ReadyToOrder",
+  name: "AlcoGel",
   data(){
     return {
       snackbar:{
@@ -19,8 +19,8 @@ export default {
         error_color: 'info'
       },
       info: {
-        success_text: 'מלצר/ית בדרך אליך!',
-        OrderTypeID: '1000'
+        success_text: 'אלקוג\'ל בדרך אליך!',
+        OrderTypeID: '1026'
       }
     }
   },
@@ -47,25 +47,22 @@ export default {
 </script>
 
 <style scoped>
-  .btn-custom{
-    font-weight: bold;
-    color: #fff !important;
-    height: 72px !important;
-    border: 2px solid #fff !important;
-    background-color: #b23e3e !important;
-  }
+.btn-custom{
+  direction: rtl;
+  font-weight: bold;
+  color: #fff !important;
+  height: 72px !important;
+  border: 2px solid #fff !important;
+  background-color: #d85634 !important;
+}
 
-  .rtl{
-    direction: rtl;
-  }
+.btn-custom span{
+  position: absolute;
+  margin-top:18px
+}
 
-  .btn-custom span{
-    position: absolute;
-    margin-top:18px
-  }
-
-  .btn-custom i.v-icon.v-icon {
-    position: absolute;
-    margin-top:-10px
-  }
+.btn-custom i.v-icon.v-icon {
+  position: absolute;
+  margin-top:-10px
+}
 </style>

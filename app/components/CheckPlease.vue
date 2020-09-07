@@ -1,6 +1,6 @@
 <template>
-  <v-btn rounded block class="btn-custom" @click="MakeOrder( )"><v-icon x-large>mdi-calculator</v-icon><span>חשבון בבקשה</span>
-    <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
+  <v-btn rounded block class="btn-custom" @click="MakeOrder( )"><v-icon large>mdi-calculator</v-icon><span>חשבון בבקשה</span>
+    <v-snackbar v-model="snackbar.on" timeout="2000" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
   </v-btn>
 </template>
 
@@ -9,32 +9,35 @@ export default {
   name: "CheckPlease",
   data(){
     return {
-      color: '',
-      text: '',
-      snackbar: false,
-      error_text: 'לא שכחתי ממך, כבר אצליך :)',
-      success_color: 'success',
-      error_color: 'info',
+      snackbar:{
+        on: false,
+        bgcolor: '',
+        message: '',
+        success_text: '',
+        error_text: 'לא שכחתי ממך, כבר אצליך :)',
+        success_color: 'success',
+        error_color: 'info'
+      },
       info: {
         success_text: 'חשבון בדרך אליך!',
-        order: {
-          OrderTypeID: '1025'
-        }
+        OrderTypeID: '1025'
       }
     }
   },
   methods: {
     async MakeOrder( ){
-      await this.$axios.post('/order', this.info.order).then((res) => {
+      await this.$axios.post('/order', {
+        OrderTypeID: this.info.OrderTypeID
+      }).then((res) => {
         if(res.status == 200 && res.data.toString() == 'OK' ){
-          this.text = this.info.success_text
-          this.color = this.success_color
+          this.snackbar.message = this.info.success_text
+          this.snackbar.bgcolor = this.snackbar.success_color
         }
         else{
-          this.text = this.error_text
-          this.color = this.error_color
+          this.snackbar.message = this.snackbar.error_text
+          this.snackbar.bgcolor = this.snackbar.error_color
         }
-        this.snackbar = true
+        this.snackbar.on = true
       }).catch((e) => {
         this.$auth.logout( )
       })
@@ -48,14 +51,14 @@ export default {
   direction: rtl !important;
   font-weight: bold;
   color: #fff !important;
-  height: 80px !important;
+  height: 72px !important;
   border: 2px solid #fff !important;
   background-color: #676e3a !important;
 }
 
 .btn-custom span{
   position: absolute;
-  margin-top:20px
+  margin-top:18px
 }
 
 .btn-custom i.v-icon.v-icon {

@@ -1,5 +1,5 @@
 <template>
-  <v-btn rounded class="btn-custom mb-4" block @click="MakeOrder( )"><v-icon right x-large>mdi-smoking</v-icon><span>מאפרה</span><v-spacer/>
+  <v-btn rounded class="btn-custom mb-4" block @click="MakeOrder( )"><v-icon right large>mdi-smoking</v-icon><span>מאפרה</span><v-spacer/>
     <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
   </v-btn>
 </template>
@@ -48,13 +48,13 @@ export default {
   direction: rtl;
   font-weight: bold;
   color: #fff !important;
-  height: 80px !important;
+  height: 72px !important;
   border: 2px solid #fff !important;
   background-color: #d85634 !important;
 }
 .btn-custom span{
   position: absolute;
-  margin-top:20px
+  margin-top:18px
 }
 
 .btn-custom i.v-icon.v-icon {

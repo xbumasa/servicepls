@@ -3,6 +3,7 @@
     <v-row>
       <v-col>
         <ReadyToOrder/>
+        <Extras/>
         <Napkin/>
         <Ashtray/>
         <BeerWine/>
@@ -10,6 +11,7 @@
       </v-col>
       <v-col>
         <CallToWaiter/>
+        <AlcoGel/>
         <Cutlery/>
         <Menu/>
         <Bread/>
@@ -29,6 +31,7 @@
 import Cutlery from "@/components/Cutlery";
 import Napkin from "@/components/Napkin";
 import ReadyToOrder from "@/components/ReadyToOrder";
+import AlcoGel from "@/components/AlcoGel";
 import CallToWaiter from "@/components/CallToWaiter";
 import Ashtray from "@/components/Ashtray";
 import Menu from "@/components/Menu";
@@ -37,16 +40,29 @@ import Bread from "@/components/Bread";
 import HotDrinks from "@/components/HotDrinks";
 import BeerWine from "@/components/BeerWine";
 import CheckPlease from "@/components/CheckPlease";
+import Extras from "@/components/Extras";
 
 export default {
   name: "service",
+  data(){
+    return {
+      num: 0
+    }
+  },
+  methods:{
+    handleChange(){
+
+    }
+  },
   layout: "app",
   components: {
+    Extras,
     CheckPlease,
     BeerWine,
     Cutlery,
     Napkin,
     ReadyToOrder,
+    AlcoGel,
     CallToWaiter,
     Ashtray,
     Menu,
