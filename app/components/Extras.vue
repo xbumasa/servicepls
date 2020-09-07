@@ -30,6 +30,13 @@
             </v-list-item-icon>
           </v-list-item>
           <v-divider/>
+          <v-list-item @click="MakeOrder(info.tabasco)" class="rtl">
+            <v-list-item-content><span>טבסקו</span></v-list-item-content>
+            <v-list-item-icon>
+              <v-icon>mdi-gesture-tap</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-divider/>
         </v-col>
       </v-card>
     </v-dialog>
@@ -62,6 +69,10 @@ export default {
         sugar:{
           success_text: 'סוכר בדרך אליך!',
           OrderTypeID: '1029'
+        },
+        tabasco:{
+          success_text: 'טבסקו בדרך אליך!',
+          OrderTypeID: '1030'
         }
       }
     }
