@@ -1,7 +1,7 @@
 <template>
     <v-btn rounded block class="btn-custom rtl mb-4" @click="ShowDialog()">
-    <v-dialog v-model="dialog" fullscreen transition="scale-transition">
-      <v-toolbar color="#6c9899">
+    <v-dialog v-model="dialog.on" fullscreen transition="scale-transition">
+      <v-toolbar :color="dialog.bgcolor">
         <v-btn icon @click="CloseDialog()" color="white">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -47,9 +47,9 @@
         </v-col>
       </v-card>
     </v-dialog>
-    <v-icon x-large>mdi-cup</v-icon><span>שתיה קלה</span>
-      <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
-      <v-dialog v-model="dialog_amount" @close="CloseAmountDialog()">
+    <v-icon large>mdi-cup</v-icon><span>שתיה קלה</span>
+      <v-snackbar v-model="snackbar.on" :timeout="snackbar.timeout" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
+      <v-dialog v-model="popup.on" @close="CloseAmountDialog()">
         <v-card raised loading>
           <v-card-text align="center" class="pt-6">
             <v-row align-content="center">
@@ -80,19 +80,24 @@ export default {
   name: "ColdDrinks",
   data () {
     return {
-      dialog: false,
-      notifications: false,
-      sound: true,
-      widgets: true,
-      color: '',
-      text: '',
-      snackbar: false,
-      error_text: 'לא שכחתי ממך, כבר אצליך :)',
-      success_color: '#98ac3b',
-      error_color: '#d85634',
+      dialog:{
+        on: false,
+        bgcolor: '#6c9899'
+      },
+      snackbar:{
+        on: false,
+        bgcolor: '',
+        message: '',
+        error_text: 'לא שכחתי ממך, כבר אצליך :)',
+        success_color: '#98ac3b',
+        error_color: '#d85634',
+        timeout: 3000
+      },
+      popup:{
+        on: false
+      },
       order_info: {},
       amount: 1,
-      dialog_amount: false,
       info: {
         colddrink1:{
           success_text: 'מים בדרך אליך!',
@@ -124,14 +129,14 @@ export default {
         OrderAmount: this.amount
       }).then((res) => {
         if(res.status == 200 && res.data.toString() == 'OK' ){
-          this.text = this.order_info.success_text
-          this.color = this.success_color
+          this.snackbar.message = this.order_info.success_text
+          this.snackbar.bgcolor = this.snackbar.success_color
         }
         else{
-          this.text = this.error_text
-          this.color = this.error_color
+          this.snackbar.message = this.snackbar.error_text
+          this.snackbar.bgcolor = this.snackbar.error_color
         }
-        this.snackbar = true
+        this.snackbar.on = true
         this.CloseAmountDialog()
       }).catch((e) => {
         this.$auth.logout( )
@@ -139,17 +144,17 @@ export default {
     },
     ShowAmountDialog(){
       this.ResetAmount()
-      this.dialog_amount = true
+      this.popup.on = true
     },
     CloseAmountDialog(){
-      this.dialog_amount = false
+      this.popup.on = false
       this.ResetAmount()
     },
     ShowDialog(){
-      this.dialog = true
+      this.dialog.on = true
     },
     CloseDialog(){
-      this.dialog = false
+      this.dialog.on = false
     },
     ResetAmount(){
       this.amount = 1

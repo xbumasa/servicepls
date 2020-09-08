@@ -1,6 +1,6 @@
 <template>
   <v-btn rounded class="btn-custom mb-4" block @click="MakeOrder()"><v-icon large>mdi-bell-outline</v-icon><span>תקרא למלצר</span>
-    <v-snackbar v-model="snackbar.on" timeout="2000" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
+    <v-snackbar v-model="snackbar.on" :timeout="snackbar.timeout" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
   </v-btn>
 </template>
 
@@ -16,7 +16,8 @@ export default {
         success_text: '',
         error_text: 'לא שכחתי ממך, כבר אצליך :)',
         success_color: 'success',
-        error_color: 'info'
+        error_color: 'info',
+        timeout: 3000
       },
       info: {
         success_text: 'מלצר/ית בדרך אליך!',

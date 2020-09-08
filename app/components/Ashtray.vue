@@ -1,6 +1,6 @@
 <template>
   <v-btn rounded class="btn-custom mb-4" block @click="MakeOrder( )"><v-icon right large>mdi-smoking</v-icon><span>מאפרה</span><v-spacer/>
-    <v-snackbar v-model="snackbar" timeout="2000" top class="rtl" :color="color">{{ text }}</v-snackbar>
+    <v-snackbar v-model="snackbar.on" :timeout="snackbar.timeout" top class="rtl" :color="snackbar.bgcolor">{{ snackbar.message }}</v-snackbar>
   </v-btn>
 </template>
 
@@ -9,32 +9,35 @@ export default {
   name: "Ashtray",
   data(){
     return {
-      color: '',
-      text: '',
-      snackbar: false,
-      error_text: 'לא שכחתי ממך, כבר אצליך :)',
-      success_color: 'success',
-      error_color: 'info',
+      snackbar:{
+        on: false,
+        bgcolor: '',
+        message: '',
+        error_text: 'לא שכחתי ממך, כבר אצליך :)',
+        success_color: 'success',
+        error_color: 'info',
+        timeout: 3000
+      },
       info: {
         success_text: 'תפסיק לעשן!',
-        order: {
-          OrderTypeID: '1003'
-        }
+        OrderTypeID: '1003'
       }
     }
   },
   methods: {
     async MakeOrder( ){
-      await this.$axios.post('/order', this.info.order).then((res) => {
+      await this.$axios.post('/order', {
+        OrderTypeID: this.info.OrderTypeID
+      }).then((res) => {
         if(res.status == 200 && res.data.toString() == 'OK' ){
-          this.text = this.info.success_text
-          this.color = this.success_color
+          this.snackbar.message = this.order_info.success_text
+          this.snackbar.bgcolor = this.snackbar.success_color
         }
         else{
-          this.text = this.error_text
-          this.color = this.error_color
+          this.snackbar.message = this.snackbar.error_text
+          this.snackbar.bgcolor = this.snackbar.error_color
         }
-        this.snackbar = true
+        this.snackbar.on = true
       }).catch((e) => {
         this.$auth.logout( )
       })
