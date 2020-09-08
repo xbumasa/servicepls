@@ -5,7 +5,7 @@
     </v-app-bar>
     <Nuxt />
     <br/>
-    <v-footer app fixed color="#dbd4c4" class="white--text" :style="{borderTop: '1px solid #fff'}">
+    <v-footer color="#dbd4c4" class="white--text" :style="{borderTop: '1px solid #fff'}">
       <span>servicepls.me</span>
       <v-spacer/>
       <span>&copy; {{ new Date().getFullYear() }}</span>
